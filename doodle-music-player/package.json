@@ -1,14 +1,30 @@
 {
   "name": "doodle-music-player",
-  "version": "1.0.0",
+  "private": true,
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "echo 'Lint check passed'",
-    "test": "echo 'Tests passed'",
-    "format:check": "echo 'Format check passed'"
+    "lint": "echo 'Linting...'",
+    "test": "echo 'Tests passed'"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zustand": "^4.4.0",
+    "framer-motion": "^10.16.0",
+    "react-router-dom": "^6.14.0",
+    "lucide-react": "^0.263.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^4.4.0",
+    "tailwindcss": "^3.3.0",
+    "postcss": "^8.4.24",
+    "autoprefixer": "^10.4.14"
+  }
 }
