@@ -1,115 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Patrick+Hand&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --font-doodle: 'Patrick Hand', cursive;
+  --font-sans: 'Outfit', sans-serif;
+  
+  /* Color Palette */
+  --bg-paper: #fdfcfa;
+  --ink: #1e293b;
+  --ink-light: #64748b;
+  --border: #334155;
+  
+  /* Pastels */
+  --pastel-purple: #e9d5ff; /* purple-200 */
+  --pastel-pink: #fbcfe8; /* pink-200 */
+  --pastel-yellow: #fef08a; /* yellow-200 */
+  --pastel-blue: #bae6fd; /* sky-200 */
+  --pastel-green: #bbf7d0; /* emerald-200 */
+  
+  --accent: #a855f7;
+  --accent-hover: #9333ea;
+  
+  --paper-grid: rgba(148, 163, 184, 0.12);
+  --paper-margin: rgba(239, 68, 68, 0.25);
+  
+  --shadow-block: 4px 4px 0px 0px var(--ink);
+  --shadow-block-lg: 8px 8px 0px 0px var(--ink);
+  --shadow-block-sm: 2px 2px 0px 0px var(--ink);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+.dark {
+  --bg-paper: #18181b; /* zinc-900 */
+  --ink: #f8fafc; /* slate-50 */
+  --ink-light: #94a3b8; /* slate-400 */
+  --border: #f1f5f9; /* slate-100 */
+  
+  /* Pastels (darkened overlay or adjusted for contrast) */
+  --pastel-purple: #3b0764; /* purple-950 */
+  --pastel-pink: #500724; /* pink-950 */
+  --pastel-yellow: #422006; /* yellow-950 */
+  --pastel-blue: #082f49; /* sky-950 */
+  --pastel-green: #022c22; /* emerald-950 */
+  
+  --accent: #c084fc;
+  --accent-hover: #a855f7;
+  
+  --paper-grid: rgba(148, 163, 184, 0.08);
+  --paper-margin: rgba(239, 68, 68, 0.35);
+  
+  --shadow-block: 4px 4px 0px 0px var(--ink);
+  --shadow-block-lg: 8px 8px 0px 0px var(--ink);
+  --shadow-block-sm: 2px 2px 0px 0px var(--ink);
 }
 
 body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background-color: var(--bg-paper);
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+/* Lined and Grid Notebook Paper Styles */
+.notebook-grid {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, var(--paper-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--paper-grid) 1px, transparent 1px);
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+.notebook-lines {
+  background-size: 100% 28px;
+  background-image: linear-gradient(to bottom, transparent 27px, var(--paper-grid) 27px);
+}
+
+/* Notebook red margin line */
+.notebook-margin-line {
+  position: relative;
+}
+.notebook-margin-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 3rem;
+  width: 2px;
+  background-color: var(--paper-margin);
+  pointer-events: none;
+}
+
+/* Sketchy Borders */
+.sketch-card {
+  border: 3px solid var(--ink);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  box-shadow: var(--shadow-block);
+  transition: all 0.2s ease;
+}
+.sketch-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-block-lg);
+}
+
+.sketch-card-static {
+  border: 3px solid var(--ink);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  box-shadow: var(--shadow-block);
+}
+
+.sketch-btn {
+  border: 2px solid var(--ink);
+  border-radius: 12px 4px 14px 5px/5px 14px 4px 12px;
+  box-shadow: var(--shadow-block-sm);
+  background-color: var(--bg-paper);
+  transition: all 0.15s ease;
+}
+.sketch-btn:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-block);
+}
+.sketch-btn:active:not(:disabled) {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+.sketch-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sketch-input {
+  border: 2.5px solid var(--ink);
+  border-radius: 8px 4px 9px 5px/5px 9px 4px 8px;
+  background-color: var(--bg-paper);
+  color: var(--ink);
+  outline: none;
+  font-family: var(--font-sans);
+}
+.sketch-input:focus {
+  border-color: var(--accent);
+}
+
+/* Handwritten Font helper */
+.font-handwritten {
+  font-family: var(--font-doodle);
+  letter-spacing: 0.5px;
+}
+
+/* Custom Scrollbar for Hand-drawn look */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-paper);
+  border-left: 2px solid var(--ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ink-light);
+  border: 2px solid var(--ink);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink);
+}
+
+/* Highlight scribbling animation */
+@keyframes scribble {
+  0% {
+    stroke-dashoffset: 1000;
   }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+  100% {
+    stroke-dashoffset: 0;
   }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
 }

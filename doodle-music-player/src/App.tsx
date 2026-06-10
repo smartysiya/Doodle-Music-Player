@@ -1,16 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './components/LandingPage';
-import DoodleMusicPlayer from './components/DoodleMusicPlayer';
+import AudioPlayer from './components/AudioPlayer.tsx';
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/player" element={<DoodleMusicPlayer />} />
-      </Routes>
-    </Router>
-  );
+  return <AudioPlayer />;
 }
 
 export default App;

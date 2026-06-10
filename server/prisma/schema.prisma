@@ -1,0 +1,74 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String     @id @default(uuid())
+  username     String     @unique
+  email        String     @unique
+  passwordHash String
+  playlists    Playlist[]
+  favorites    Favorite[]
+  history      History[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Song {
+  id            String         @id @default(uuid())
+  title         String
+  artist        String
+  fileUrl       String
+  duration      Float
+  uploadedBy    String?
+  playlistItems PlaylistItem[]
+  favorites     Favorite[]
+  history       History[]
+  createdAt     DateTime       @default(now())
+}
+
+model Playlist {
+  id        String         @id @default(uuid())
+  name      String
+  userId    String
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     PlaylistItem[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+}
+
+model PlaylistItem {
+  id         String   @id @default(uuid())
+  playlistId String
+  playlist   Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  songId     String
+  song       Song     @relation(fields: [songId], references: [id], onDelete: Cascade)
+  order      Int
+
+  @@unique([playlistId, songId])
+}
+
+model Favorite {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  songId    String
+  song      Song     @relation(fields: [songId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, songId])
+}
+
+model History {
+  id       String   @id @default(uuid())
+  userId   String
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  songId   String
+  song     Song     @relation(fields: [songId], references: [id], onDelete: Cascade)
+  playedAt DateTime @default(now())
+}
